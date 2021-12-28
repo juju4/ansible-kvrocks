@@ -21,6 +21,11 @@
   when: ansible_os_family == "RedHat"
 
 - block:
+    - name: Debian | Update cache
+      apt:
+        update_cache: yes
+        cache_valid_time: "{{ kvrocks_apt_cache_valid_time | default('3600') }}"
+
     - name: Debian | Install kvrocks dependencies package
       package:
         name: libsnappy-dev
