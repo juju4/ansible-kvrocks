@@ -20,8 +20,14 @@
     disable_gpg_check: "{{ kvrocks_disable_gpg_check | default(omit) }}"
   when: ansible_os_family == "RedHat"
 
-- name: Debian | Install kvrocks package
-  package:
-    deb: "{{ install_archives }}/{{ kvrocks_pkg_url | basename }}"
-    state: present
+- block:
+    - name: Debian | Install kvrocks dependencies package
+      package:
+        name: libsnappy-dev
+        state: present
+
+    - name: Debian | Install kvrocks package
+      package:
+        deb: "{{ install_archives }}/{{ kvrocks_pkg_url | basename }}"
+        state: present
   when: ansible_os_family == "Debian"
