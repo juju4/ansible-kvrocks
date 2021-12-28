@@ -1,0 +1,27 @@
+---
+
+- name: Ensure install archives directory exists
+  file:
+    dest: "{{ install_archives }}"
+    mode: '0755'
+    state: directory
+
+- name: Download kvrocks package
+  get_url:
+    url: "{{ kvrocks_pkg_url }}"
+    checksum: "{{ kvrocks_pkg_hash }}"
+    dest: "{{ install_archives }}"
+    mode: '0644'
+
+- name: RedHat | Install kvrocks package
+  package:
+    name: "{{ install_archives }}/{{ kvrocks_pkg_url | basename }}"
+    state: present
+    disable_gpg_check: "{{ kvrocks_disable_gpg_check | default(omit) }}"
+  when: ansible_os_family == "RedHat"
+
+- name: Debian | Install kvrocks package
+  package:
+    deb: "{{ install_archives }}/{{ kvrocks_pkg_url | basename }}"
+    state: present
+  when: ansible_os_family == "Debian"

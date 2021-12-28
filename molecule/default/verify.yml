@@ -1,0 +1,20 @@
+---
+
+- name: Verify
+  hosts: kvrocks
+  gather_facts: false
+  tasks:
+    - name: Gather package facts
+      package_facts:
+        manager: auto
+    - name: Validate that needed packages are present
+      assert:
+        that: ansible_facts.packages['kvrocks']
+
+    - name: Check kvrocks binary file
+      stat:
+        path: /www/kvrocks/bin/kvrocks
+      register: bin1
+    - name: Validate kvrocks binary is present
+      assert:
+        that: bin1.stat.exists and bin1.stat.size != 0
