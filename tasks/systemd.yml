@@ -1,5 +1,10 @@
 ---
 
+- name: Ensure systemd is present
+  package:
+    name: systemd
+    state: present
+
 - name: Ensure override folder exists
   file:
     dest: /etc/systemd/system/kvrocks.service.d
