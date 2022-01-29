@@ -1,2 +1,15 @@
 ---
 # handlers file for juju4.kvrocks
+
+- name: reload systemd
+  systemd:
+    daemon_reload: yes
+  when: >
+    not (ansible_virtualization_type is defined and (ansible_virtualization_type == "docker"))
+
+- name: restart kvrocks
+  systemd:
+    name: kvrocks
+    state: restarted
+  when: >
+    not (ansible_virtualization_type is defined and (ansible_virtualization_type == "docker"))
