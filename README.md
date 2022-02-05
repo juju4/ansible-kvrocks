@@ -46,6 +46,10 @@ $ MOLECULE_DISTRO=ubuntu:20.04 molecule test --destroy=never
 
 * Be aware that rpm package installs file in /www/kvrocks and does not include any systemd unit file.
 
+* Molecule docker uses [Docker official build of CentOS](https://hub.docker.com/_/centos) but with Centos8 End-Of-Life, repositories are not valid anymore. Moved to alternate distributions.
+[Failed to download metadata for repo ‘AppStream’ CentOS, Feb 2022](https://techglimpse.com/failed-metadata-repo-appstream-centos-8/)
+[CentOS 8 is dead: choosing a replacement Docker image, Jan 2022](https://pythonspeed.com/articles/centos-8-is-dead/)
+
 ## License
 
 BSD 2-clause
