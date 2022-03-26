@@ -1,18 +1,18 @@
 ---
 
 - name: Ensure systemd is present
-  package:
+  ansible.builtin.package:
     name: systemd
     state: present
 
 - name: Ensure override folder exists
-  file:
+  ansible.builtin.file:
     dest: /etc/systemd/system/kvrocks.service.d
     state: directory
     mode: '0755'
 
 - name: Review kvrocks systemd options
-  template:
+  ansible.builtin.template:
     src: systemd-override-kvrocks.conf.j2
     dest: /etc/systemd/system/kvrocks.service.d/hardening.conf
     mode: '0644'
