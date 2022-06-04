@@ -20,7 +20,8 @@
     disable_gpg_check: "{{ kvrocks_disable_gpg_check | default(omit) }}"
   when: ansible_os_family == "RedHat"
 
-- block:
+- name: Debian
+  block:
     - name: Debian | Update cache
       ansible.builtin.apt:
         update_cache: yes
