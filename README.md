@@ -1,5 +1,5 @@
-[![Actions Status - Master](https://github.com/juju4/ansible-adduser/workflows/AnsibleCI/badge.svg)](https://github.com/juju4/ansible-adduser/actions?query=branch%3Amaster)
-[![Actions Status - Devel](https://github.com/juju4/ansible-adduser/workflows/AnsibleCI/badge.svg?branch=devel)](https://github.com/juju4/ansible-adduser/actions?query=branch%3Adevel)
+[![Actions Status - Master](https://github.com/juju4/ansible-kvrocks/workflows/AnsibleCI/badge.svg)](https://github.com/juju4/ansible-kvrocks/actions?query=branch%3Amaster)
+[![Actions Status - Devel](https://github.com/juju4/ansible-kvrocks/workflows/AnsibleCI/badge.svg?branch=devel)](https://github.com/juju4/ansible-kvrocks/actions?query=branch%3Adevel)
 
 # kvrocks ansible role
 
@@ -14,7 +14,7 @@ It was tested on the following versions:
 
 ### Operating systems
 
-Tested on Ubuntu 14.04, 16.04, 18.04, Centos 6, 7 and OpenBSD 5.8.
+Tested on Ubuntu 18.04, 20.04.
 
 ## Example Playbook
 
