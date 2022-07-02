@@ -1,6 +1,7 @@
 ---
 galaxy_info:
   author: juju4
+  role_name: kvrocks
   description: Install kvrocks, distributed key value NoSQL database based on RocksDB and compatible with Redis protocol.
   license: BSD
   min_ansible_version: '2.1'
