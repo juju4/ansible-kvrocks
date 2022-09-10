@@ -17,5 +17,5 @@
     dest: /etc/systemd/system/kvrocks.service.d/hardening.conf
     mode: '0644'
   notify:
-    - reload systemd
-    - restart kvrocks
+    - Reload systemd
+    - Restart kvrocks
