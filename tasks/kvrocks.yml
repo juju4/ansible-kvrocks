@@ -21,6 +21,7 @@
   when: ansible_os_family == "RedHat"
 
 - name: Debian
+  when: ansible_os_family == "Debian"
   block:
     - name: Debian | Update cache
       ansible.builtin.apt:
@@ -36,4 +37,3 @@
       ansible.builtin.package:
         deb: "{{ install_archives }}/{{ kvrocks_pkg_url | basename }}"
         state: present
-  when: ansible_os_family == "Debian"

@@ -14,9 +14,11 @@
   ansible.builtin.include_vars: "Alpine.yml"
   when: ansible_os_family == "Alpine"
 
-- import_tasks: kvrocks.yml
+- name: Import kvrocks
+  ansible.builtin.import_tasks: kvrocks.yml
 
-- import_tasks: systemd.yml
+- name: Import systemd
+  ansible.builtin.import_tasks: systemd.yml
   when: >
     not (ansible_virtualization_type is defined and
           (ansible_virtualization_type == "docker" or ansible_virtualization_type == "containerd")
