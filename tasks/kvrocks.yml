@@ -1,38 +1,39 @@
 ---
 
 - name: Ensure install archives directory exists
-  file:
+  ansible.builtin.file:
     dest: "{{ install_archives }}"
     mode: '0755'
     state: directory
 
 - name: Download kvrocks package
-  get_url:
+  ansible.builtin.get_url:
     url: "{{ kvrocks_pkg_url }}"
     checksum: "{{ kvrocks_pkg_hash }}"
     dest: "{{ install_archives }}"
     mode: '0644'
 
 - name: RedHat | Install kvrocks package
-  package:
+  ansible.builtin.package:
     name: "{{ install_archives }}/{{ kvrocks_pkg_url | basename }}"
     state: present
     disable_gpg_check: "{{ kvrocks_disable_gpg_check | default(omit) }}"
   when: ansible_os_family == "RedHat"
 
-- block:
+- name: Debian
+  when: ansible_os_family == "Debian"
+  block:
     - name: Debian | Update cache
-      apt:
+      ansible.builtin.apt:
         update_cache: yes
         cache_valid_time: "{{ kvrocks_apt_cache_valid_time | default('3600') }}"
 
     - name: Debian | Install kvrocks dependencies package
-      package:
+      ansible.builtin.package:
         name: libsnappy-dev
         state: present
 
     - name: Debian | Install kvrocks package
-      package:
+      ansible.builtin.package:
         deb: "{{ install_archives }}/{{ kvrocks_pkg_url | basename }}"
         state: present
-  when: ansible_os_family == "Debian"
