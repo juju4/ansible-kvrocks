@@ -9,7 +9,7 @@
 - name: Download kvrocks package
   ansible.builtin.get_url:
     url: "{{ kvrocks_pkg_url }}"
-    checksum: "{{ kvrocks_pkg_hash }}"
+    checksum: "{{ kvrocks_pkg_hash | default(omit) }}"
     dest: "{{ install_archives }}"
     mode: '0644'
 

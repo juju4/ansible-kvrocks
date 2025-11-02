@@ -1,4 +1,0 @@
----
-
-kvrocks_pkg_url: "{{ kvrocks_deb }}"
-kvrocks_pkg_hash: "{{ kvrocks_deb_hash }}"
