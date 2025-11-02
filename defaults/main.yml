@@ -5,7 +5,7 @@ kvrocks_github_version: 'v2.0.5'
 kvrocks_v: "{{ kvrocks_github_version | regex_replace('^v', '') }}"
 kvrocks_deb: "https://github.com/KvrocksLabs/kvrocks/releases/download/{{ kvrocks_github_version }}/kvrocks_{{ kvrocks_v }}-release_amd64.deb"
 # kvrocks_deb_hash: 'sha256:b2119a73422ea67ec3ec4bf1f18dd2b411f0fc85f8d135cb397643746ddef8a7'
-kvrocks_deb: "https://github.com/KvrocksLabs/kvrocks/releases/download/{{ kvrocks_github_version }}/kvrocks_{{ kvrocks_v }}-release.x86_64.rpm"
+kvrocks_rpm: "https://github.com/KvrocksLabs/kvrocks/releases/download/{{ kvrocks_github_version }}/kvrocks_{{ kvrocks_v }}-release.x86_64.rpm"
 # kvrocks_rpm_hash: 'sha256:4fb4c31b8c6fd2392ac21cd3d6013b7c39527849bc56c2fc153eaccf64ec64da'
 
 install_archives: /var/_install
