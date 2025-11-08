@@ -14,6 +14,20 @@
       paths:
         - 'vars'
 
+- name: Debian | Set fact
+  ansible.builtin.set_fact:
+    kvrocks_pkg_url: "{{ kvrocks_deb }}"
+    kvrocks_pkg_hash: "{{ kvrocks_deb_hash | default(omit) }}"
+  when:
+    - ansible_os_family == 'Debian'
+
+- name: RedHat | Set fact
+  ansible.builtin.set_fact:
+    kvrocks_pkg_url: "{{ kvrocks_rpm }}"
+    kvrocks_pkg_hash: "{{ kvrocks_rpm_hash | default(omit) }}"
+  when:
+    - ansible_os_family == 'RedHat'
+
 - name: Import kvrocks
   ansible.builtin.import_tasks: kvrocks.yml
 
