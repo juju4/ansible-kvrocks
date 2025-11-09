@@ -13,7 +13,7 @@
 
     - name: Check kvrocks binary file
       ansible.builtin.stat:
-        path: /www/kvrocks/bin/kvrocks
+        path: /usr/bin/kvrocks
       register: bin1
     - name: Validate kvrocks binary is present
       ansible.builtin.assert:
