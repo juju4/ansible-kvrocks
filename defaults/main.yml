@@ -1,9 +1,8 @@
 ---
 
-# renovate: datasource=github-releases depName=KvrocksLabs/kvrocks
-kvrocks_github_version: '202510222'
-# kvrocks_v: "{{ kvrocks_github_version | regex_replace('^v', '') }}"
-kvrocks_v: "2.13.0-1"
+# renovate: datasource=github-releases depName=RocksLabs/kvrocks-fpm
+kvrocks_github_version: '2.14.0-1'
+kvrocks_v: "{{ kvrocks_github_version | regex_replace('^v', '') }}"
 kvrocks_repo: RocksLabs/kvrocks-fpm
 kvrocks_deb: "https://github.com/{{ kvrocks_repo }}/releases/download/{{ kvrocks_github_version }}/kvrocks_{{ kvrocks_v }}_amd64.deb"
 # kvrocks_deb_hash: 'sha256:b2119a73422ea67ec3ec4bf1f18dd2b411f0fc85f8d135cb397643746ddef8a7'
