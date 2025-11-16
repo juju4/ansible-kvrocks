@@ -9,7 +9,8 @@
         manager: auto
     - name: Validate that needed packages are present
       ansible.builtin.assert:
-        that: ansible_facts.packages['kvrocks']
+        that:
+          - ansible_facts.packages['kvrocks'] is defined
 
     - name: Check kvrocks binary file
       ansible.builtin.stat:
