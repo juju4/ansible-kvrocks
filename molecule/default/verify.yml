@@ -2,7 +2,7 @@
 
 - name: Verify
   hosts: kvrocks
-  gather_facts: false
+  gather_facts: true
   vars:
     exec_file: /usr/bin/kvrocks
     processes:
