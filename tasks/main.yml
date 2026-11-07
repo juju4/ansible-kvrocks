@@ -36,4 +36,4 @@
   when: >
     not (ansible_facts['virtualization_type'] is defined and
           (ansible_facts['virtualization_type'] == "docker" or ansible_facts['virtualization_type'] == "containerd")
-    )
+    ) and kvrocks_systemd_enable | bool

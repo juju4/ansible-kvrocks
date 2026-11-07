@@ -1,21 +1,81 @@
 ---
 
-- name: Ensure systemd is present
-  ansible.builtin.package:
-    name: systemd
-    state: present
+- name: Systemd
+  when: ansible_facts['service_mgr'] == 'systemd'
+  block:
+    - name: Configure base kvrocks systemd unit
+      ansible.builtin.template:
+        src: systemd-kvrocks.conf.j2
+        dest: /etc/systemd/system/kvrocks.conf
+        mode: '0644'
+      notify:
+        - Reload systemd
+        - Restart kvrocks
 
-- name: Ensure override folder exists
-  ansible.builtin.file:
-    dest: /etc/systemd/system/kvrocks.service.d
-    state: directory
-    mode: '0755'
+    - name: Ensure override folder exists
+      ansible.builtin.file:
+        dest: /etc/systemd/system/kvrocks.service.d
+        state: directory
+        mode: '0755'
 
-- name: Review kvrocks systemd options
-  ansible.builtin.template:
-    src: systemd-override-kvrocks.conf.j2
-    dest: /etc/systemd/system/kvrocks.service.d/hardening.conf
-    mode: '0644'
-  notify:
-    - Reload systemd
-    - Restart kvrocks
+    # if issue, check /var/log/audit/audit.log
+    - name: Review kvrocks systemd options
+      ansible.builtin.template:
+        src: systemd-override-kvrocks.conf.j2
+        dest: /etc/systemd/system/kvrocks.service.d/hardening.conf
+        mode: '0644'
+      notify:
+        - Reload systemd
+        - Restart kvrocks
+  rescue:
+    - name: Import immutable
+      ansible.builtin.import_tasks: immutable.yml
+      vars:
+        target_dir: /etc/systemd/system
+        state: pre
+    - name: Import immutable
+      ansible.builtin.import_tasks: immutable.yml
+      vars:
+        target_dir: "/etc/systemd/system/kvrocks.service.d"
+        state: pre
+    - name: Import immutable
+      ansible.builtin.import_tasks: immutable.yml
+      vars:
+        target_dir: "/etc/systemd/system/kvrocks.service.d/hardening.conf"
+        state: pre
+
+    - name: Configure base kvrocks systemd unit (immutable)
+      ansible.builtin.template:
+        src: systemd-kvrocks.conf.j2
+        dest: /etc/systemd/system/kvrocks.conf
+        mode: '0644'
+      notify:
+        - Reload systemd
+        - Restart kvrocks
+
+    - name: Ensure override folder exists (immutable)
+      ansible.builtin.file:
+        dest: /etc/systemd/system/kvrocks.service.d
+        state: directory
+        mode: '0755'
+
+    # if issue, check /var/log/audit/audit.log
+    - name: Review kvrocks systemd options (immutable)
+      ansible.builtin.template:
+        src: systemd-override-kvrocks.conf.j2
+        dest: /etc/systemd/system/kvrocks.service.d/hardening.conf
+        mode: '0644'
+      notify:
+        - Reload systemd
+        - Restart kvrocks
+
+    - name: Import immutable
+      ansible.builtin.import_tasks: immutable.yml
+      vars:
+        target_dir: /etc/systemd/system
+        state: post
+    - name: Import immutable
+      ansible.builtin.import_tasks: immutable.yml
+      vars:
+        target_dir: "/etc/systemd/system/kvrocks.service.d/hardening.conf"
+        state: post

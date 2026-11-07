@@ -1,0 +1,23 @@
+{{ ansible_managed }}
+
+# https://github.com/apache/kvrocks/blob/unstable/utils/systemd/kvrocks.service
+[Unit]
+Description=kvrocks SSD key-value database
+Documentation=https://github.com/apache/kvrocks
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=notify
+ExecStart={{ kvrocks_bin }} -c {{ kvrocks_conf }}
+Restart=on-failure
+ExecStop=/bin/kill -s TERM $MAINPID
+RestartSec=10s
+LimitNOFILE=100000
+LimitNPROC=4096
+TimeoutSec=300
+NoNewPrivileges=yes
+
+[Install]
+WantedBy=multi-user.target
+Alias=kvrocks.service

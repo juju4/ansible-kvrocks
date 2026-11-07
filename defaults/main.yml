@@ -9,4 +9,8 @@ kvrocks_deb: "https://github.com/{{ kvrocks_repo }}/releases/download/{{ kvrocks
 kvrocks_rpm: "https://github.com/{{ kvrocks_repo }}/releases/download/{{ kvrocks_github_version }}/kvrocks-{{ kvrocks_v }}.x86_64.rpm"
 # kvrocks_rpm_hash: 'sha256:4fb4c31b8c6fd2392ac21cd3d6013b7c39527849bc56c2fc153eaccf64ec64da'
 
+kvrocks_systemd_enable: true
+kvrocks_bin: /usr/bin/kvrocks
+kvrocks_conf: /usr/share/kvrocks/kvrocks.conf
+
 install_archives: /var/_install
