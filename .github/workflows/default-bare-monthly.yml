@@ -139,6 +139,11 @@ jobs:
           systemd-analyze --no-pager security || true
         if: ${{ always() }}
         continue-on-error: true
+      - name: After script - dpkg
+        run: |
+          dpkg -L kvrocks
+        if: ${{ always() }}
+        continue-on-error: true
       - name: After script - network
         run: |
           sudo ss -tunap
