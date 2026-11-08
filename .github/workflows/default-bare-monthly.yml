@@ -139,9 +139,16 @@ jobs:
           systemd-analyze --no-pager security || true
         if: ${{ always() }}
         continue-on-error: true
+      - name: After script - journalctl
+        run: |
+          journalctl -xeu kvrocks -l --no-pager || true
+        if: ${{ always() }}
+        continue-on-error: true
       - name: After script - dpkg
         run: |
+          set -x
           dpkg -L kvrocks
+          cat /usr/share/kvrocks/kvrocks.conf
         if: ${{ always() }}
         continue-on-error: true
       - name: After script - network
