@@ -1,6 +1,6 @@
 ---
 
-# renovate: datasource=github-releases depName=RocksLabs/kvrocks-fpm
+# renovate: datasource=github-releases depName=RocksLabs/kvrocks-fpm versioning=regex:^(?<major>\d+)\.(?<minor>\d+)\.(?<patch>\d+)-(?<build>\d+)$
 kvrocks_github_version: '2.14.0-1'
 kvrocks_v: "{{ kvrocks_github_version | regex_replace('^v', '') }}"
 kvrocks_repo: RocksLabs/kvrocks-fpm
